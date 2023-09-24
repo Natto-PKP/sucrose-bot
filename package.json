@@ -17,9 +17,10 @@
   },
   "homepage": "https://github.com/Natto-PKP/discord-sucrose-typescript-template#readme",
   "dependencies": {
-    "discord-sucrose": "^8.0.0-dev.7dqqnpLK",
     "discord.js": "^14.13.0",
-    "dotenv": "^16.0.1"
+    "dotenv": "^16.0.1",
+    "openai": "^4.10.0",
+    "discord-sucrose": "^8.0.0-dev.7dqqnpLK"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.1.2",

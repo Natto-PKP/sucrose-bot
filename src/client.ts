@@ -1,4 +1,4 @@
-import Sucrose from 'discord-sucrose';
+import { Sucrose } from 'discord-sucrose';
 import { GatewayIntentBits, Partials } from 'discord.js';
 import { extname } from 'path';
 
@@ -6,8 +6,20 @@ import { extname } from 'path';
  * Similar to the Client class from discord.js, but with more features
  */
 const client = new Sucrose({
-  intents: [GatewayIntentBits.Guilds],
-  partials: [Partials.Channel],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.DirectMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildMembers,
+  ],
+  partials: [
+    Partials.Channel,
+    Partials.GuildMember,
+    Partials.Message,
+    Partials.User,
+    Partials.Reaction,
+  ],
 });
 
 /**
@@ -32,15 +44,13 @@ client.once('ready', async () => {
   await client.interactions.cooldowns.load({ path: `${SRC}/cooldowns` });
   await client.interactions.permissions.load({ path: `${SRC}/permissions` });
 
+  // await client.interactions.commands.deploy('ask', '713172382042423352');
+
   /**
    * Load all events
    */
   await client.events.load({ path: `${SRC}/events`, depth: 2 });
-
   client.events.listenAll();
-
-  console.log('events', client.events.collection.size);
-
   client.emit('ready' as any, client);
 });
 
